@@ -1,0 +1,125 @@
+:root {
+    --primary:  #F2E9EB;
+    --secondary: #1E3640;
+    --grey: #A9BEC8;
+    --dark-cyan: #34C3BE;
+    --lighten-yellow: #F2B138;
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--primary);
+    position: relative;
+    font-family: "Sofia", sans-serif;
+}
+.main {
+    width: 100%;
+    min-height: 300px;
+    margin:0px;
+    padding: 0px;
+    background-color: hsl(343, 54%, 71%, 0.3);
+    border-radius: 1em;
+    align-content: center;
+    position: relative;
+    top: 5em;
+    float: left;
+}
+.pleyr-chose {
+    display: flex;
+}
+.header{
+    display: flex;
+    flex-flow: row nowrap;
+    flex-shrink: 2;
+}
+
+.logo img {
+    min-height: 1em;
+    min-width: 2em;
+}
+.content {
+    max-width: 30em;
+    align-self: center;
+    padding: 2em;
+    line-height: 2.1em;
+    color: #3c4fe0;
+}
+.midel-icon {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    gap: 1em;
+    position: fixed;
+    min-width: 10em;
+    top: 30px;
+    right: 2em;
+    min-height: 25em;
+    border:1px solid #F2B138;
+    background-color:  #F2D4D6;
+    border-radius: 2em;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.button button{
+    border-radius: 4em;
+    min-width: 6em;
+    border: unset;
+}
+
+/* CSS */
+.button-29 {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #ce3333;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button-29:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.button-29:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-29:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
+.button-2 {
+    min-width: 10em;
+    color: #ffff;
+    border-radius: 4em;
+    border: unset;
+}
+
+.text {
+    color: #3c4fe0;
+    margin: 0px;
+    padding: 0px;
+    justify-self: center;
+    font-size: larger;
+}
