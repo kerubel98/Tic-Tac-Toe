@@ -197,3 +197,10 @@ body {
   left: 28px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.winer-bord {
+    min-width: 100%;
+    min-height: 200%;
+    background-color: #5468ff;
+    text-align: center;
+}

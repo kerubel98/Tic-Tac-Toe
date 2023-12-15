@@ -159,12 +159,15 @@ function Gamecontroler(){
 
     const pleyermove = ()=>{
         const parent = document.querySelector('.game')
-        winer = false
+        const winer1 = document.querySelector('.winer-bord')
+        let winer = false
+
         parent.addEventListener('click', (event)=>{
                 const clickedElement = event.target;
                 let index = clickedElement.dataset.index
                 const [i, j] = index.split(',');
                 let bd = board.getBoard()
+
                 if(!winer){
                 if(board.cellEmpty(i, j)){
                         let ht = bd[i][j]
@@ -174,6 +177,10 @@ function Gamecontroler(){
                         pleyerTurn()
                     }
                     winer = board.gameover(i, j)
+                    if(winer){
+                        winer1.innerHTML = `${activePleyr}`
+                        console.log(winer1)
+                    }
                 }
             })
         }

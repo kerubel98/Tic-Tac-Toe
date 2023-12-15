@@ -2,13 +2,24 @@
 const frame = document.querySelector('.game');
 const Button = document.getElementById('n2');
 const element = document.querySelector('.content')
+const notice = document.querySelector('.text')
+const winer = document.querySelector('.winer-bord')
+
 
 
 Button.addEventListener('click', ()=>{
   element.parentNode.replaceChild(frame, element);
   frame.classList.remove('view')
+
 });
 
+winer.addEventListener('MutationObserver', ()=>{
+  notice.classList.add('view')
+  winer.classList.remove('view')
+})
 
-//const frameElement = document.getElementById('myFrame');
-//moveFrameLeft(frame, -800, 5000); // Move the frame 100px to the left in 0.5 seconds
+///remianing a pleyer bot that takes token the pleyer didnt chose
+///can pleye with the pleyer
+///1- take board and serch for emptty item then add its token --stage 1
+///take copied cell and choos 2 similar icones the pleyer can coplite then interapt by ading icon
+///costum pathes
