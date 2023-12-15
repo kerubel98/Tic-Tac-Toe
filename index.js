@@ -1,13 +1,14 @@
 
-const dilaogElemnt = document.querySelector("dialog");
-const showbutton = document.getElementById("but");
-const close = document.getElementById('close');
+const frame = document.querySelector('.game');
+const Button = document.getElementById('n2');
+const element = document.querySelector('.content')
 
-showbutton.addEventListener("click", ()=>{
-    dilaogElemnt.showModal();
+
+Button.addEventListener('click', ()=>{
+  element.parentNode.replaceChild(frame, element);
+  frame.classList.remove('view')
 });
 
-close.addEventListener("click", ()=>{
-    close_1.close()
-});
 
+//const frameElement = document.getElementById('myFrame');
+//moveFrameLeft(frame, -800, 5000); // Move the frame 100px to the left in 0.5 seconds

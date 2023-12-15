@@ -1,118 +1,189 @@
 function pleyer(token){
-    this.token = token;
-    let pleyerch = 
+    let name = token
+      if(token === 'X'){
+        token = `<img src="./asset/medicine-icon-svgrepo-com.svg" alt="" id="X">`
 
-    const getpleyertoken = (pltoken)=>{
-        if(pltoken === X){
-            token1 = 'X'
-        }
-    }
+      }else if (token === 'O'){
+        token = `<img src="./asset/capsule-svgrepo-com.svg" alt="" id="O">`
 
+      }
+      return {token, name}
 
-    return [token1, token2]
 }
 
-function cell(index, pleyer){
-    //this object change its value bassed on the pleyer preses that cell
-    //pushed trough all the game board arrey and expect the pleyer  to push
-    //give its value to the sale
-    //gate value from pleyer
-    const indx = [0, 0]
-    let value = 0;
+function cell(i, j){
+    let value = null;
+    let pleyername = null
+    const elemenet = document.createElement('div');
+    elemenet.dataset.index = `${i},${j}`;
+    elemenet.className = 'square';
+
 
     const addvalue = (pleyer) =>{
-        value = pleyer;
+        value = pleyer.token
+        elemenet.innerHTML = value
     };
-    const addindex = (index)=> {
-        indx[0] = index[0];
-        indx[1] = index[1]
-    }
-    const getvalue = ()=>value;
-    const getindex = ()=>indx;
 
-    return{addvalue, getvalue, addindex, getindex}
+    const addname = (pleyer)=>{
+        pleyername = pleyer.name
+    }
+    const displeycell = (parent)=>{
+        parent.appendChild(elemenet)
+    }
+    const getplayer = ()=>pleyername;
+    const getvalue = ()=>value;
+    const getelement = ()=>elemenet;
+    return{addvalue, getvalue, displeycell, addname, getelement, getplayer}
 
 }
-function btoa(cell){
-    let avelbelcells = []
-    let value = 0;
-    const nonpleyertoken = pleyer();
-    const updatavelbelcell = (cell)=>{
-        avelbelcells = cell;
-    }
-    const addvalue = ()=>{
-        value = (Math.floor(Math.random()))*avelbelcells.length;
-    }
-    const
+function bot(cell){
+    //pleyer bot that thek defrnt toke from the me
 }
 
 function GameBoard(){
-    const board = []
-    const value = cell()
-    const celllist = [];
+    let cleswithvalue = []
+    const board = [];
     for(i=0; i<3; i++){
         board[i] = [];
         for(j=0; j<3; j++){
-            board[i].push(cell());
+            board[i].push(cell(i, j));
+        }
+    };
+    const getBoard = ()=> board;
+
+    function isBoardFull() {
+        for (let row = 0; row < 3; row++) {
+          for (let col = 0; col < 3; col++) {
+            if (board[row][col] === null) {
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+
+    const cellEmpty = (i, j)=>{
+        if(board[i][j].getplayer() === null){
+            return true
+        }else{
+            return false
         }
     }
-    board.forEach(function(row, i){
-        celllist[i] = []
-        row.forEach(function(col, j){
-            const cell = document.createElement('div');
-            cell.className = 'cell';
-            col.addindex([i, j])
-            celllist[i].push(cell)
-        });
-    })
-    const getBoard = ()=>board;
-    const getcellist = ()=>celllist;
+    const indexlist = (i, j)=>{
+        if(cellEmpty(i, j)){
+            cleswithvalue.push([i, j])
+        }
 
-    const avelbelcell = ()=>{
-        board.filter(function(row){
-            row.filter(function(col){
-                col.getvalue() === 0;
+      }
+    const allEqual = (arr)=>arr.every(elemenet=>elemenet ===arr[0])
+    const iswiner = (col)=>{
+        let name = [];
+        for(j=0; j<3; j++){
+            if(Boolean(col[j])){
+                name.push(board[col[j][0]][col[j][1]].getplayer())
+            }
+        }
+        if(name.length === 3){
+            if(allEqual(name)){
+                return name[0]
+            }
+        }
+    }
+
+
+    const colmnwon = (i)=>{
+        col = cleswithvalue.filter((elemenet)=>elemenet[1] ===i)
+       return iswiner(col)
+
+    }
+    const rowwon = (i)=>{
+        col = cleswithvalue.filter((elemenet)=>elemenet[0] ===i)
+        return iswiner(col)
+    }
+    const croswon = ()=>{
+        col = cleswithvalue.filter((elemenet)=>elemenet[0] === elemenet[1])
+        return iswiner(col)
+    }
+    const croswontwo = ()=>{
+       col = cleswithvalue.filter((elemenet)=>((elemenet[0] - elemenet[1]) === 2) || ((elemenet[0] - elemenet[1]) === -2)
+        || (elemenet.every(val=> val === '1')))
+        return iswiner(col)
+    }
+
+
+    const gameover = (i, j)=>{
+        let clo = colmnwon(j)
+        let row = rowwon(i)
+        let digX = croswon()
+        let digY = croswontwo()
+        let iswiner = false
+        let win = [clo, row, digX, digY]
+        if(clo || row || digX || digY){
+            iswiner = true
+
+        }
+        if(iswiner){
+        indx = win.findIndex((el)=> el)
+        win[indx]
+        return iswiner
+    }
+
+    }
+
+    const getclawithvalue = ()=>cleswithvalue;
+
+
+    const vewer = (parent)=>{
+        board.forEach(function(row){
+            row.forEach(function(col){
+                col.displeycell(parent)
             })
-        })
+        });
     };
 
 
-
-
-    return {getBoard, avelbelcell, getcellist}
-
+    return {getBoard, vewer, getclawithvalue, gameover, indexlist, cellEmpty, colmnwon, rowwon}
 };
 function Gamecontroler(){
-    const wboard = GameBoard()
-    const board = wboard.getcellist()
-    const pboard = wboard.getBoard()
-    let cells = document.querySelector(".game")
-    const [pleyer1, pleyer2] = pleyer();
-    let activePleyr = pleyer1;
+    const board = GameBoard()
+    let parent = document.querySelector(".game")
+    const disply = board.vewer(parent);
+    const pleyer1 = [pleyer('X'), pleyer('O')];
+    let activePleyr = pleyer1[0];
 
     const pleyerTurn = ()=>{
-        activePleyr = activePleyr === pleyer1 ? pleyer2 : pleyer1;
-    }
-    const pleyeraction = (i, j, ev)=>{
-        ev.addEventListener('click', (e)=>{
-            pleyerTurn()
-            pboard[i][j].addvalue(activePleyr)
-            board[i][j].innerHTML = pboard[i][j].getvalue()
-            board[i][j].style.pointerEvents = 'none';
-        })
-    }
-    const displeybox = ()=>{
-       wboard.getcellist().forEach(function(row, i){
-        row.forEach(function(col, j){
-            pleyeraction(i, j, col)
-            cells.appendChild(col)
-        })
-       })
+        activePleyr = activePleyr === pleyer1[0] ? pleyer1[1] : pleyer1[0];
     }
 
 
-return {displeybox}
+    const pleyermove = ()=>{
+        const parent = document.querySelector('.game')
+        winer = false
+        parent.addEventListener('click', (event)=>{
+                const clickedElement = event.target;
+                let index = clickedElement.dataset.index
+                const [i, j] = index.split(',');
+                let bd = board.getBoard()
+                if(!winer){
+                if(board.cellEmpty(i, j)){
+                        let ht = bd[i][j]
+                        board.indexlist(i, j)
+                        ht.addname(activePleyr)
+                        ht.addvalue(activePleyr)
+                        pleyerTurn()
+                    }
+                    winer = board.gameover(i, j)
+                }
+            })
+        }
 
+
+return {pleyermove, disply}
 }
-let b = Gamecontroler()
-b.displeybox()
+
+
+let pl = Gamecontroler()
+pl.pleyermove()
+
+

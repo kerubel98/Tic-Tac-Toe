@@ -25,10 +25,12 @@ body {
 }
 .pleyr-chose {
     display: flex;
+    position: relative;
 }
 .header{
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-evenly;
     flex-shrink: 2;
 }
 
@@ -38,25 +40,31 @@ body {
 }
 .content {
     max-width: 30em;
+    min-width: 25em;
     align-self: center;
     padding: 2em;
     line-height: 2.1em;
     color: #3c4fe0;
+    position: fixed;
+    top: 50px;
+    left: 35em;
 }
 .midel-icon {
-    display: grid;
-    align-content: center;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
     justify-content: center;
     gap: 1em;
-    position: fixed;
-    min-width: 10em;
-    top: 30px;
+    position: absolute;
+    min-width: 12em;
+    top: -60px;
     right: 2em;
-    min-height: 25em;
+    min-height: 27em;
     border:1px solid #F2B138;
     background-color:  #F2D4D6;
     border-radius: 2em;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    transition: .15s;
 }
 .button button{
     border-radius: 4em;
@@ -121,5 +129,71 @@ body {
     margin: 0px;
     padding: 0px;
     justify-self: center;
-    font-size: larger;
+    max-width: 10em;
+    padding: 1em;
+    text-align: center;
+}
+.game {
+    width: 20em;
+    height: 19.5em;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 1em;
+    row-gap: 10px;
+    position: relative;
+    top: -40px;
+    left: 100px;
+
+}
+.square {
+  width: 120px;
+  height: 120px;
+  border: 1px solid blue;
+  text-align: center;
+  line-height: 133px;
+  font-size: 4em;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.12);
+}
+.square img {
+    width: 70px;
+}
+.view {
+    display: none;
+}
+#sq {
+    width: 86px;
+  height: 45px;
+  border: 1px solid blue;
+  text-align: center;
+  line-height: 133px;
+  font-size: 4em;
+  cursor: pointer;
+  border-radius: 5px;
+  position: absolute;
+  text-align: center;
+  top: 3.2em;
+  left: 3.74em;
+  margin: 0px;
+  padding: 0px;
+
+}
+#sq h6 {
+    color: red;
+    list-style: none;
+    text-align: start;
+    max-width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  white-space: wrap;
+  padding: 0px;
+  margin: 0px;
+  font-size: 30px;
+  position: relative;
+  top: -45px;
+  left: 28px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
