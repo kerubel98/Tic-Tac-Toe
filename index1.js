@@ -14,6 +14,7 @@ function pleyer(token){
 function cell(i, j){
     let value = null;
     let pleyername = null
+    let winer = null;
     const elemenet = document.createElement('div');
     elemenet.dataset.index = `${i},${j}`;
     elemenet.className = 'square';
@@ -30,10 +31,16 @@ function cell(i, j){
     const displeycell = (parent)=>{
         parent.appendChild(elemenet)
     }
+    const addwiner = (w)=>{
+        if(winer === null){
+            winer = pleyer(w).token
+        }
+    }
+    const getwiner = ()=>winer;
     const getplayer = ()=>pleyername;
     const getvalue = ()=>value;
     const getelement = ()=>elemenet;
-    return{addvalue, getvalue, displeycell, addname, getelement, getplayer}
+    return{addvalue, getvalue, displeycell, addname, getelement, getplayer, addwiner, getwiner}
 
 }
 function bot(cell){
@@ -125,7 +132,7 @@ function GameBoard(){
         }
         if(iswiner){
         indx = win.findIndex((el)=> el)
-        win[indx]
+        board[i][j].addwiner(win[indx])
         return iswiner
     }
 
@@ -143,7 +150,7 @@ function GameBoard(){
     };
 
 
-    return {getBoard, vewer, getclawithvalue, gameover, indexlist, cellEmpty, colmnwon, rowwon}
+    return {getBoard, vewer, getclawithvalue, gameover, indexlist, cellEmpty, isBoardFull}
 };
 function Gamecontroler(){
     const board = GameBoard()
@@ -159,34 +166,38 @@ function Gamecontroler(){
 
     const pleyermove = ()=>{
         const parent = document.querySelector('.game')
-        const winer1 = document.querySelector('.winer-bord')
-        let winer = false
-
+        const winner = document.querySelector('.winer-bord')
+        const notice = document.getElementById('notice')
         parent.addEventListener('click', (event)=>{
                 const clickedElement = event.target;
                 let index = clickedElement.dataset.index
                 const [i, j] = index.split(',');
                 let bd = board.getBoard()
-
-                if(!winer){
-                if(board.cellEmpty(i, j)){
-                        let ht = bd[i][j]
-                        board.indexlist(i, j)
-                        ht.addname(activePleyr)
-                        ht.addvalue(activePleyr)
-                        pleyerTurn()
+                let win = bd[i][j].getwiner()
+                if(win === null || board.isBoardFull() === false){
+                    if(board.cellEmpty(i, j)){
+                            let ht = bd[i][j]
+                            board.indexlist(i, j)
+                            ht.addname(activePleyr)
+                            ht.addvalue(activePleyr)
+                            pleyerTurn()
+                            gameover = board.gameover(i, j)
+                            if(gameover){
+                                winner.innerHTML = bd[i][j].getwiner()
+                                //notice.parentNode.replaceChild(winner, notice);
+                                winner.classList.remove('view')
+                                notice.innerHTML = "congerats";
+                            }
                     }
-                    winer = board.gameover(i, j)
-                    if(winer){
-                        winer1.innerHTML = `${activePleyr}`
-                        console.log(winer1)
-                    }
+                }else if(board.isBoardFull()){
+                    winner.innerHTML = "Derow"
                 }
+
             })
         }
 
 
-return {pleyermove, disply}
+return {pleyermove}
 }
 
 

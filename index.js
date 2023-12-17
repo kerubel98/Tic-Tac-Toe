@@ -2,7 +2,7 @@
 const frame = document.querySelector('.game');
 const Button = document.getElementById('n2');
 const element = document.querySelector('.content')
-const notice = document.querySelector('.text')
+const notice = document.getElementById('notice')
 const winer = document.querySelector('.winer-bord')
 
 
@@ -14,7 +14,7 @@ Button.addEventListener('click', ()=>{
 });
 
 winer.addEventListener('MutationObserver', ()=>{
-  notice.classList.add('view')
+  notice.style.display = "none";
   winer.classList.remove('view')
 })
 
